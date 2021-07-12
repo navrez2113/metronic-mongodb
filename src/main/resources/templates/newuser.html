@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+</head>
+<body>
+	<div class="container  mb-4 ">
+		<h1>Save New User</h1>
+		<form action="#" th:action="@{/admin/saveUser}" th:object="${user}"
+			method="POST">
+
+			<table border="0" cellpadding="10">
+				<tr>
+					<td></td>
+					<td><input type="text" th:field="*{firstName}"
+						placeholder="User First Name" class="form-control mb-4 col-100"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" th:field="*{lastName}"
+						placeholder="User Last Name" class="form-control mb-4 col-100"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="text" th:field="*{username}"
+						placeholder="User Email" class="form-control mb-4 col-100"></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><input type="password" th:field="*{password}"
+						placeholder="Password" class="form-control mb-4 col-100"></td>
+				</tr>
+
+				<tr class ="  col-20  text-center">
+					<td><button type="submit" class="btn btn-info col-20  mb-1 text-center">Save</button></td>
+				</tr>
+
+				<tr>
+					<td><a class="btn btn-info col-20  mb-1" th:href="@{/admin}">
+							Cancel</a></td>
+				</tr>
+
+			</table>
+		</form>
+
+
+	</div>
+</body>
+</html>

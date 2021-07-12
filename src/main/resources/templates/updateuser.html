@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>User Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+</head>
+
+<body>
+	<div class="container">
+		<hr>
+		<h2>Update User</h2>
+
+		<form action="#" th:action="@{/admin/update/{id}(id=${user.id})}"
+			th:object="${user}" method="POST">
+
+
+
+			<input type="text" id="firstName" th:field="${user.firstName}"
+				placeholder="firstName" class="form-control mb-4 col-5">
+		   <input
+				type="text" id="lastName" th:field=" ${user.lastName}"
+				placeholder="lastName" class="form-control mb-4 col-5"> 
+		 <input
+				type="text" id="username" th:field=" ${user.username}"
+				placeholder="username" class="form-control mb-4 col-5">
+
+			<button type="submit" class="btn btn-info col-1">Update</button>
+		</form>
+
+		<hr>
+
+		<a type="submit"
+			class="btn btn-light-blue font-weight-bolder btn-info col-1 "
+			th:href="@{/admin}">Cancel</a>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+
+</head>
+<h1 class="container my-1 text-center">Welcome to Admin Page</h1>
+<div class="container my-2">
+	<h2>Users List</h2>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<ul class="nav navbar-nav">
+				<li sec:authorize="isAuthenticated()"><a
+					class="btn btn-primary btn-md-2 mb-2 fas fa" th:href="@{/dologout}">Logout</a></li>
+			</ul>
+		</div>
+		<div id="navbar" class="container navbar-fixed-top">
+		</div>
+		<div id="navbar" class="container navbar-fixed-top">
+			<a class="btn btn-primary btn-md navbar-fixed-top fas fa"
+				th:href="@{/index}"> Back to Home Page</a>
+		</div>
+	</nav>
+
+	<br> <br>
+
+
+	<div sec:authorize="hasAnyAuthority('ADMIN')">
+		<a type="button" class="btn btn-primary btn-md fas fa"
+			th:href="@{/admin/showNewUserForm}">Add User</a>
+	</div>
+	<br> <br>
+	<table border="1" class="table table-striped table-responsive-md "
+		style="font-style: italic; font-variant: inherit; list-style: lower-roman; font-family: fantasy;; font-size-adjust: inherit; outline-style: ridge; border-top-style: groove;">
+		<thead style="background-color: teal; font-variant: small-caps;"
+			class=" text-center">
+			<div sec:authorize="hasAnyAuthority('ADMIN')">
+						<a type="button" class=" md mb-2 fas fa-chekbox"
+							name="submit" for="toggle" value="Submit"
+							th:href="@{/admin/activeAll}"> Sms Active</a> <a
+							type="submit" onclick="submit"
+							class="btn btn-primary btn-md mb-2 fas fa-chekbox" name="cancel"
+							value="Cancel" th:href="@{/admin/pasiveAll}">Sms Pasive</a>
+					</div>
+			<tr>
+				<th>User First Name</th>
+				<th>User Last Name</th>
+				<th>User Email</th>
+				<th>Status</th>
+				<th>Actions</th>
+				
+			</tr>
+		</thead>
+		<tbody style="text-align: left">
+			<tr th:each="user : ${listUsers}">
+				<td th:text="${user.firstName}">First Name</td>
+				<td th:text="${user.lastName}">Last Name</td>
+				<td th:text="${user.username}">Email</td>
+			
+					
+			
+				<td>
+					<div sec:authorize="hasAnyAuthority('ADMIN')">
+						<a type="switch" class="switch md mb-2 fas fa-chekbox"
+							name="submit" for="toggle" value="Submit"
+							th:href="@{/admin/activeUser/{id}(id=${user.id})}">Active</a> <a
+							type="submit" onclick="submit"
+							class="btn btn-primary btn-md mb-2 fas fa-chekbox" name="cancel"
+							value="Cancel" th:href="@{/admin/pasiveUser/{id}(id=${user.id})}">Pasive</a>
+					</div>
+				</td>
+				<td sec:authorize="hasAnyAuthority('ADMIN')">
+					<div sec:authorize="hasAnyAuthority('ADMIN')"
+						class="ng-star-inserted">
+						<a type="button" role="switch" aria-checked="true"
+							class=" switch checked switch-medium btn btn-primary btn-md mb-2 fas fa-trash-alt md-1"
+							th:href="@{/admin/deleteUser/{id}(id=${user.id})}"> Delete</a>
+					</div>
+					<div sec:authorize="hasAnyAuthority('ADMIN')">
+						<a type="button" class="btn btn-primary btn-md fas fa-edit"
+							th:href="@{/admin/edit/{id}(id=${user.id})}"> Update</a>
+					</div>
+				</td>
+			</tr>
+
+
+
+		</tbody>
+	</table>
+
+</div>
+
+</html>
